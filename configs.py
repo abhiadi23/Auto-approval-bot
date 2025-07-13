@@ -5,10 +5,11 @@ class Config:
     API_HASH = getenv("API_HASH", "")
     BOT_TOKEN = getenv("BOT_TOKEN", "")
     PORT = os.environ.get("PORT", "8080")
-    ADMIN_URL = "https://t.me/botskingdoms"
+    WEBHOOK = bool(os.environ.get("WEBHOOK", "True"))
     
    # Your other confgs 
     BOT_UPTIME  = time.time()
+    ADMIN_URL = "https://t.me/botskingdoms"
     START_PIC   = os.environ.get("START_PIC", "https://ibb.co/DH3N4Lyr")
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
     FORCE_SUB   = os.environ.get("FORCE_SUB", "") 
