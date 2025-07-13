@@ -82,3 +82,5 @@ async def start(client, message: Message):
         
         return
       
+@Client.on_callback_query()
+async def cb_handler(client, query: CallbackQuery):
