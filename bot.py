@@ -52,3 +52,5 @@ self.start_time = time.time()
                 )
             except Exception as e:
                 print(f"Failed to send message in chat {chat_id}: {e}")
+
+Bot().run()
