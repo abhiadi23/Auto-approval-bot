@@ -6,7 +6,7 @@ from pyrogram import filters, Client, errors, enums
 from pyrogram.errors import UserNotParticipant
 from pyrogram.errors.exceptions.flood_420 import FloodWait
 from database import add_user, add_group, all_users, all_groups, users, remove_user
-from configs import cfg
+from config import config
 from aiohttp import web
 from route import web_server
 import random, asyncio
@@ -15,9 +15,9 @@ PORT = Config.PORT
 
 app = Client(
     "approver",
-    api_id=cfg.API_ID,
-    api_hash=cfg.API_HASH,
-    bot_token=cfg.BOT_TOKEN
+    api_id=config.API_ID,
+    api_hash=config.API_HASH,
+    bot_token=config.BOT_TOKEN
 )
 self.start_time = time.time()
 
@@ -53,4 +53,21 @@ self.start_time = time.time()
             except Exception as e:
                 print(f"Failed to send message in chat {chat_id}: {e}")
 
-Bot().run()
+
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main process ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@app.on_chat_join_request(filters.group | filters.channel)
+async def approve(_, m : Message):
+    op = m.chat
+    kk = m.from_user
+    try:
+        add_group(m.chat.id)
+        await app.approve_chat_join_request(op.id, kk.id)
+        await app.send_message(kk.id, "**Hello {}!\nWelcome To {}\n\n__Powerd By : @VJ_Botz __**".format(m.from_user.mention, m.chat.title))
+        add_user(kk.id)
+    except errors.PeerIdInvalid as e:
+        print("user isn't start bot(means group)")
+    except Exception as err:
+        print(str(err))    
+ 
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
