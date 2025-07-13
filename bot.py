@@ -9,7 +9,11 @@ from database import add_user, add_group, all_users, all_groups, users, remove_u
 from config import config
 from aiohttp import web
 from route import web_server
+import pyrogram.utils
 import random, asyncio
+
+pyrogram.utils.MIN_CHANNEL_ID = -1002822095762
+SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "@botskingdomschat")
 
 PORT = Config.PORT
 
@@ -63,7 +67,7 @@ async def approve(_, m : Message):
     try:
         add_group(m.chat.id)
         await app.approve_chat_join_request(op.id, kk.id)
-        await app.send_message(kk.id, "**Hello {}!\nWelcome To {}\n\n__Powerd By : @VJ_Botz __**".format(m.from_user.mention, m.chat.title))
+        await app.send_message(kk.id, "**Hello {}!\nWelcome To {}\n\n__Powerd By : @Botskingdom __**".format(m.from_user.mention, m.chat.title))
         add_user(kk.id)
     except errors.PeerIdInvalid as e:
         print("user isn't start bot(means group)")
