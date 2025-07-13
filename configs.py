@@ -1,4 +1,4 @@
-import re, os, time
+import os, time
 from os import path, getenv
 
 class Config:
