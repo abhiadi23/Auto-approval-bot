@@ -70,4 +70,4 @@ async def approve(_, m : Message):
     except Exception as err:
         print(str(err))    
  
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bot().run()
